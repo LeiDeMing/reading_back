@@ -11,6 +11,11 @@ async function response(ctx, next) {
 
 router.post('/api/reading_front/user/login', async (ctx, next) => {
     console.log(ctx)
+    ctx.body = {
+        code: 200,
+        data: []
+    }
+    await next()
 })
 
 module.exports = router
