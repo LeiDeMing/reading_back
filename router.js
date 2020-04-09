@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const user = require('./actions/user')
 
 async function response(ctx, next) {
     ctx.body = {
@@ -10,8 +11,8 @@ async function response(ctx, next) {
 }
 
 router.post('/api/reading_front/user/login', async (ctx, next) => {
-    const { request: { body: { autoLogin, name, password ,phone} } } = ctx
-    console.log(autoLogin, name, password ,phone)
+    const { request: { body: { autoLogin, name, password, phone } } } = ctx
+    user.checkUser({ autoLogin, name, password, phone })
     ctx.body = {
         code: 200,
         data: []
