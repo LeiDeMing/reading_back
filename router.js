@@ -12,10 +12,20 @@ async function response(ctx, next) {
 
 router.post('/api/reading_front/user/login', async (ctx, next) => {
     const { request: { body: { autoLogin, name, password, phone } } } = ctx
-    user.checkUser({ autoLogin, name, password, phone })
-    ctx.body = {
-        code: 200,
-        data: []
+    const haveUser = await user.checkUser({ autoLogin, name, password, phone })
+    console.log(haveUser)
+    if (haveUser) {
+        ctx.body = {
+            code: 200,
+            msg: '登陆成功！',
+            data: []
+        }
+    } else {
+        ctx.body = {
+            code: 400,
+            msg: '登陆失败！',
+            data: []
+        }
     }
     await next()
 })
