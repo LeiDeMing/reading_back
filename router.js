@@ -21,6 +21,7 @@ router.post('/api/reading_front/user/login', async (ctx, next) => {
             data: []
         }
     } else {
+        ctx.status = 400
         ctx.body = {
             code: 400,
             msg: '登陆失败！',
